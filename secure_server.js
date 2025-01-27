@@ -4,7 +4,7 @@ const session = require("express-session");
 const fs = require("fs");
 const bcrypt = require("bcrypt");
 const csrf = require("csurf");
-require("dotenv").config(); // Pour charger les variables d'environnement depuis le fichier .env
+require("dotenv").config(); // Charger les variables d'environnement
 
 // Initialize the app
 const app = express();
@@ -17,19 +17,19 @@ const csrfProtection = csrf({ cookie: true });
 // Sécurisation des cookies de session
 app.use(
   session({
-    secret: process.env.SESSION_SECRET, // Utilisation de la variable d'environnement pour la clé secrète
+    secret: process.env.SESSION_SECRET, // Clé secrète pour les sessions
     resave: false,
     saveUninitialized: true,
     cookie: {
-      httpOnly: true, // Empêche l'accès au cookie via JavaScript
-      secure: process.env.NODE_ENV === "production", // En production, le cookie sera envoyé seulement sur HTTPS
-      maxAge: 60000, // Durée d'expiration du cookie (1 minute dans cet exemple)
+      httpOnly: true, // Empêche l'accès JavaScript
+      secure: process.env.NODE_ENV === "production", // HTTPS en production
+      maxAge: 60000, // 1 minute d'expiration
     },
   })
 );
 
 app.use(express.json());
-app.use(csrfProtection); // Protection CSRF pour toutes les routes suivantes
+app.use(csrfProtection); // Protection CSRF activée
 
 // Serve static files
 app.use("/public", express.static("public"));
@@ -41,11 +41,11 @@ app.use("/protected", (req, res, next) => {
 });
 app.use("/protected", express.static("private/protected"));
 
-// Helper function to read and write to the JSON file
+// Helper functions
 const readData = async () => {
   try {
     if (!fs.existsSync(DATA_FILE)) {
-      // Initialiser un fichier vide avec des valeurs par défaut
+      // Initialiser le fichier avec des données par défaut
       await writeData({ users: [], tasks: [] });
     }
     const data = await fs.promises.readFile(DATA_FILE);
@@ -89,7 +89,6 @@ app.post("/register", async (req, res) => {
       return res.status(400).send("User already exists");
     }
 
-    // Hachage du mot de passe
     const hashedPassword = await bcrypt.hash(password, 10);
     data.users.push({ username, password: hashedPassword });
     await writeData(data);
@@ -120,7 +119,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-// Dashboard route (protected)
+// Dashboard route
 app.get("/dashboard", (req, res) => {
   if (!req.session.user) {
     return res.status(401).send("Unauthorized");
@@ -150,7 +149,7 @@ app.post("/add", async (req, res) => {
   }
 });
 
-// Get tasks for the logged-in user
+// Get tasks
 app.get("/tasks", async (req, res) => {
   if (!req.session.user) {
     return res.status(401).send("Unauthorized");
@@ -167,7 +166,7 @@ app.get("/tasks", async (req, res) => {
   }
 });
 
-// Delete task route
+// Delete task
 app.delete("/tasks/:id", async (req, res) => {
   if (!req.session.user) {
     return res.status(401).send("Unauthorized");
@@ -191,7 +190,7 @@ app.get("/logout", (req, res) => {
   res.redirect("/public/login.html");
 });
 
-// Start the server
+// Start server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
