@@ -1,8 +1,21 @@
-<div class="task-section">
-  <h2>Welcome, <span id="username">User</span>!</h2>
-  <form id="task-form">
-    <input type="text" id="task-input" placeholder="Enter a task" required>
-    <button type="submit">Add Task</button>
-  </form>
-  <ul id="task-list"></ul>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="/public/styles.css">
+  <script src="/public/dashboard.js" defer></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Dashboard</h1>
+    <div id="task-container"></div>
+    <form id="add-task-form">
+      <input type="text" id="task-input" placeholder="Enter a new task" required />
+      <button type="submit">Add Task</button>
+    </form>
+    <a href="/logout">Logout</a>
+  </div>
+</body>
+</html>
