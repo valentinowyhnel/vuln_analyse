@@ -2,7 +2,8 @@
 
 
 
-![WhatsApp Image 2025-01-28 à 17 13 01_e311809f](https://github.com/user-attachments/assets/e357c014-832d-4be9-bf8a-bd60e287561d)
+
+<img width="120" alt="image" src="https://github.com/user-attachments/assets/492668ab-4e50-4b86-80c8-e83f0e4079ec" />
 
 
 
