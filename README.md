@@ -1,5 +1,13 @@
 # Cybersecurity Analysis Project
 
+
+
+![WhatsApp Image 2025-01-28 à 17 13 01_e311809f](https://github.com/user-attachments/assets/e357c014-832d-4be9-bf8a-bd60e287561d)
+
+
+
+
+
 ## Overview
 This project provides a simple Node.js web application designed to simulate a small-scale task management system. The application has intentional issues to serve as a learning platform for analyzing security vulnerabilities and application stability.
 
